@@ -1,24 +1,32 @@
-import {useState} from 'react';
+import { useState } from "react";
+
 const AddTodo = (props) => {
+
     const [inputValue, setInputValue] = useState('');
 
-    const formSubmit = (e) =>{
+    const formSubmit = (e) => {
         console.log(e);
         e.preventDefault();
         props.adder(inputValue);
         setInputValue('');
     }
 
-    const updateInputValue = (e) =>{
+    const updateInputValue = (e) => {
         setInputValue(e.target.value);
-
-
     }
 
+
     return <form onSubmit={formSubmit}>
-        <label htmlFor="todo">Enter Item:</label>
-        <input type="text" id="todo" onChange={updateInputValue} value={inputValue}/>
+
+        <label htmlFor="todo">Enter item:</label>
+        <input 
+            type="text" 
+            id="todo" 
+            onChange={updateInputValue} 
+            value={inputValue}
+            />
         <input type="submit" />
+
     </form>;
 }
 

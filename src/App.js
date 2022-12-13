@@ -1,39 +1,40 @@
-
 import './App.css';
-import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
-import {useState, useEffect} from 'react';
+import AddTodo from './components/AddTodo';
+import { useState, useEffect } from 'react';
 import lscache from 'lscache';
 
-
 function App() {
-  const [todoList, setTodoList] = useState();
 
-  const lscachekey = 'currentList';
+  const [todoList, setTodoList] = useState([]);
 
-  useEffect(() =>{
-    let currentList = lscache.get(lscachekey);
+  const lscacheKey = 'currentList';
+
+  useEffect(() => {
+    let currentList = lscache.get(lscacheKey);
     if(!currentList){
       currentList = [];
     }
     setTodoList(currentList);
-  }, [])
+  }, []);
 
-  const addNewTodo = title =>{
+  const addNewTodo = title => {
     if(!title){
       return;
     }
     const todoListClone = [...todoList];
     todoListClone.push({title: title});
     setTodoList(todoListClone);
-    lscache.set(lscachekey, todoListClone);
+    lscache.set(lscacheKey, todoListClone);
   }
 
 
   return (
     <div className="App">
-      <TodoList todoList={todoList}/>
-      <AddTodo adder={addNewTodo}/>
+
+      <TodoList todoList={todoList} />
+      <AddTodo  adder={addNewTodo} />
+      
     </div>
   );
 }
